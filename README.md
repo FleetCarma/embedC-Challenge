@@ -41,9 +41,9 @@ typedef struct {
 }trip_event_summary_t;
 ```
 
-Specifically, you must:
+# Specifically, you must:
 
-1) Create a code library containing at least one C file and one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of a ```trip_event_summary_t```.
+1) Create a code library containing one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of a ```trip_event_summary_t```.
 	* the start time is the time that the first signal of any type is received
 	* the duration is the difference in time between the first signal (of any type) received and the last signal (of any type) received
 	* the distance travelled is the numerical integration of the VEHICLE_SIGNAL_TYPE_VEHICLE_SPEED signal
@@ -52,14 +52,30 @@ Specifically, you must:
 	* the ending SOC is the last VEHICLE_SIGNAL_TYPE_HV_BATTERY_SOC signal received
 	
 2) Write (at least one) unit test that feeds your library a set of ```vehicle_signal_t``` and checks that the resulting ```trip_event_summary_t``` is correct.
-	* Use the included CSV file with data from one of our employee's vehicles to generate a set of vehicle_signal_t for your unit test(s).
+	* The included CSV file contains data from one of our employee's vehicles. Use this data to generate a set of vehicle_signal_t for your unit test(s).
 	* A good unit test asserts a result that was derived from an independent source. Document how you determined the "correct value" for each field in trip_event_summary_t.
 	* Note that VEHICLE_SIGNAL_TYPE_HV_BATTERY_CURRENT is signed. An electric vehicle generally discharges the battery (positive current) when driving, but can also charge the battery via regenerative braking (negative current) during deceleration. The total energy to be computed is the NET POSITIVE energy drawn from the battery.
 
-Your code library will result in (at least one) C file and an accompanying header file. Make sure to use comments to describe what your code does (and, more importantly, why).
+# What you'll find to get started:
 
-You must also include another C file that runs your unit test. A simple main.c is fine. If you have a favourite C unit test library, by all means use it.
+* Two (essentially empty) source files are found in the trip_calculator directory. Use them to use to implement your library.
 
-You may create new types and variables as needed to support your calculations. Try to keep your code library file(s) from containing any state, so that they can be used in parallel by multiple processes.
+* A main.c exists for you to call your unit test(s). If you have a favourite C unit test library, by all means import it.
 
-Remember, although you will likely test your code in a desktop environment, it will ultimately execute in an embedded environment (a low-cost 32-bit micro-controller). Be cognizant of this when choosing the data types and mathematical operations for your calculations.
+* vehicle_signal_t.h can be included where knowledge of this data type is needed.
+
+* A CSV file with sample data should be used as the basis for your unit test(s).
+
+# Things to keep in mind:
+
+* There isn't a lot of code to get you started. In fact, the included files are missing some important elements. Please demonstrate best practices when updating these files.
+
+* We don't care what integration method you choose to use.
+
+* Use comments to describe what your code does (and, more importantly, why).
+
+* Feel free to add more source files if you feel that they will benefit the project.
+
+* You may create new types and variables as needed to support your calculations. Try to keep your code library file(s) from containing any state, so that they are safe to use in a multi-threaded environment.
+
+* Although you will likely test your code in a desktop environment, it will ultimately execute in an embedded environment (a low-cost 32-bit micro-controller). Be aware of this when choosing the data types and mathematical operations for your calculations.
