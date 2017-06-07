@@ -11,7 +11,7 @@ A vehicle telematics device needs to read a set of signals over a period of time
 * Trip Starting Battery State-of-Charge (SOC) Value [%]
 * Trip Ending Battery State-of-Charge (SOC) Value [%]
 
-Someone has already written the code to retrieve signals from the vehicle and make each one available as a vehicle_signal_t. This data structure contains the signal type, the time when the signal was received, and the signal value.
+Someone has already written the code to retrieve signals from the vehicle and make each one available as a ```vehicle_signal_t```. This data structure contains the signal type, the time when the signal was received, and the signal value.
 
 ```javascript
 typedef enum {
@@ -43,7 +43,7 @@ typedef struct {
 
 Specifically, you must:
 
-1) Create a code library comprised of at least one C file and one or more functions that receive a vehicle_signal_t and update the appropriate fields of trip_event_summary_t.
+1) Create a code library comprised of at least one C file and one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of ```trip_event_summary_t```.
 	* the start time is the time that the first signal of any type is received
 	* the duration is the difference in time between the first signal (of any type) received and the last signal (of any type) received
 	* the distance travelled is the numerical integration of the VEHICLE_SIGNAL_TYPE_VEHICLE_SPEED signal
@@ -51,7 +51,7 @@ Specifically, you must:
 	* the starting SOC is the first VEHICLE_SIGNAL_TYPE_HV_BATTERY_SOC signal received
 	* the ending SOC is the last VEHICLE_SIGNAL_TYPE_HV_BATTERY_SOC signal received
 	
-2) Write (at least one) unit test that feeds your library a set of vehicle_signal_t and checks that the resulting trip_event_summary_t is correct.
+2) Write (at least one) unit test that feeds your library a set of ```vehicle_signal_t``` and checks that the resulting ```trip_event_summary_t``` is correct.
 	* Use the included CSV file with data from one of our employee's vehicles to generate a set of vehicle_signal_t for your unit test(s).
 	* A good unit test asserts a result that was derived from an independent source. How did you arrive at the "correct value" for each field in trip_event_summary_t?
 	* Note that VEHICLE_SIGNAL_TYPE_HV_BATTERY_CURRENT is signed. An electric vehicle consumes energy from the battery for driving (positive current), but also charges the battery during deceleration to recover kinetic energy (negative current). The total energy is the sum of the net POSITIVE energy consumed.
