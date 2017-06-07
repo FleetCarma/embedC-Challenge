@@ -60,7 +60,7 @@ typedef struct {
 
 * Two (essentially empty) source files are found in the trip_calculator directory. Use them to use to implement your library.
 
-* A main.c exists for you to call your unit test(s). If you have a favourite C unit test library, by all means import it.
+* A main.c exists for you to call your unit test(s). If you have a favourite C unit test library then by all means import it.
 
 * vehicle_signal_t.h can be included where knowledge of this data type is needed.
 
