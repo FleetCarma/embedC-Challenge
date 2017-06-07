@@ -28,7 +28,7 @@ typedef struct {
 }vehicle_signal_t;
 ```
 
-Your job is to write a small code library to receive each signal and maintain the following trip event summary:
+Your job is to write a small code library, in C, to receive each signal and maintain the following trip event summary:
 
 ```javascript
 typedef struct {
@@ -43,7 +43,7 @@ typedef struct {
 
 Specifically, you must:
 
-1) Create a code library containing at least one C file and one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of ```trip_event_summary_t```.
+1) Create a code library containing at least one C file and one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of a ```trip_event_summary_t```.
 	* the start time is the time that the first signal of any type is received
 	* the duration is the difference in time between the first signal (of any type) received and the last signal (of any type) received
 	* the distance travelled is the numerical integration of the VEHICLE_SIGNAL_TYPE_VEHICLE_SPEED signal
@@ -53,13 +53,13 @@ Specifically, you must:
 	
 2) Write (at least one) unit test that feeds your library a set of ```vehicle_signal_t``` and checks that the resulting ```trip_event_summary_t``` is correct.
 	* Use the included CSV file with data from one of our employee's vehicles to generate a set of vehicle_signal_t for your unit test(s).
-	* A good unit test asserts a result that was derived from an independent source. How did you arrive at the "correct value" for each field in trip_event_summary_t?
-	* Note that VEHICLE_SIGNAL_TYPE_HV_BATTERY_CURRENT is signed. An electric vehicle consumes energy from the battery for driving (positive current), but also charges the battery during deceleration to recover kinetic energy (negative current). The total energy is the sum of the net POSITIVE energy consumed.
+	* A good unit test asserts a result that was derived from an independent source. Document how you determined the "correct value" for each field in trip_event_summary_t.
+	* Note that VEHICLE_SIGNAL_TYPE_HV_BATTERY_CURRENT is signed. An electric vehicle generally discharges the battery (positive current) when driving, but can also charge the battery via regenerative braking (negative current) during deceleration. The total energy to be computed is the NET POSITIVE energy drawn from the battery.
 
-Your code library should result in (at least one) C file and an accompanying header file. Make sure to use comments to describe what your code does (and, more importantly, why).
+Your code library will result in (at least one) C file and an accompanying header file. Make sure to use comments to describe what your code does (and, more importantly, why).
 
-You should also include another C file that runs your unit test. A simple main.c is fine. If you have a favourite C unit test library, by all means use it.
+You must also include another C file that runs your unit test. A simple main.c is fine. If you have a favourite C unit test library, by all means use it.
 
 You may create new types and variables as needed to support your calculations. Try to keep your code library file(s) from containing any state, so that they can be used in parallel by multiple processes.
 
-Remember that this code has to execute in an embedded environment (a low-cost 32-bit micro-controller). Be cognizant of this when choosing the data types and mathematical operations for your calculations.
+Remember, although you will likely test your code in a desktop environment, it will ultimately execute in an embedded environment (a low-cost 32-bit micro-controller). Be cognizant of this when choosing the data types and mathematical operations for your calculations.
