@@ -43,7 +43,7 @@ typedef struct {
 
 Specifically, you must:
 
-1) Create a code library comprised of at least one C file and one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of ```trip_event_summary_t```.
+1) Create a code library containing at least one C file and one or more functions that receive a ```vehicle_signal_t``` and update the appropriate fields of ```trip_event_summary_t```.
 	* the start time is the time that the first signal of any type is received
 	* the duration is the difference in time between the first signal (of any type) received and the last signal (of any type) received
 	* the distance travelled is the numerical integration of the VEHICLE_SIGNAL_TYPE_VEHICLE_SPEED signal
